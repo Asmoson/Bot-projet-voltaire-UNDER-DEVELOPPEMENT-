@@ -1,10 +1,14 @@
 import pytesseract
 from PIL import Image, ImageEnhance, ImageGrab
 from pynput import mouse
+import requests
+from time import *
 
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+url = "https://api.languagetoolplus.com/v2/check"
 
-coordinates = []
+
+
 
 def on_click(x, y, button, pressed):
     """Capture entre deux points"""
@@ -14,29 +18,59 @@ def on_click(x, y, button, pressed):
         if len(coordinates) == 2:
             return False
 
-print("Clique sur les coins de la zone a convertir")
+def attendre(x, y, button, pressed):
+    if pressed and button == mouse.Button.left:
+        None
+    else :
+        return False
 
-with mouse.Listener(on_click=on_click) as listener:
-    listener.join()
+for i in range(30):
+    print("\n")
 
-if len(coordinates) == 2:
-    x1, y1 = coordinates[0]
-    x2, y2 = coordinates[1]
-    bbox = (min(x1, x2), min(y1, y2), max(x1, x2), max(y1, y2))
+while(True):
+    coordinates = []
 
-    screenshot = ImageGrab.grab(bbox)
+    for i in range(10):
+        print("\n")
 
-    gray_image = screenshot.convert("L")
+    print("Clique sur les coins de la zone a convertir")
+
+    with mouse.Listener(on_click=on_click) as listener:
+        listener.join()
+
+    if len(coordinates) == 2:
+        x1, y1 = coordinates[0]
+        x2, y2 = coordinates[1]
+        bbox = (min(x1, x2), min(y1, y2), max(x1, x2), max(y1, y2))
+
+        screenshot = ImageGrab.grab(bbox)
+
+        gray_image = screenshot.convert("L")
 
 
-    enhancer = ImageEnhance.Contrast(gray_image)
-    high_contrast_image = enhancer.enhance(2)
+        enhancer = ImageEnhance.Contrast(gray_image)
+        high_contrast_image = enhancer.enhance(2)
 
-    threshold_image = high_contrast_image.point(lambda x: 0 if x < 128 else 255, "1")
+        threshold_image = high_contrast_image.point(lambda x: 0 if x < 128 else 255, "1")
 
 
-    text = pytesseract.image_to_string(threshold_image, lang='eng+fra')
-    print("Texte détecté :")
-    print("-----------------------------------")
-    print(text)
-    print("-----------------------------------")
+        text = pytesseract.image_to_string(threshold_image, lang='eng+fra')
+        print("\nTexte détecté :")
+        print("-----------------------------------")
+        print(text)
+        print("-----------------------------------\n\n========== FAUTE ? ==========\n")
+
+    data = {
+        "text": text,
+        "language": "fr"
+    }
+    response = requests.post(url, data=data)
+    corrections = response.json()
+    for match in corrections['matches']:
+        print(f"Suggestion : {match['replacements'][0]['value']}")
+
+    print("=============================")
+
+    
+    with mouse.Listener(on_click=attendre) as listener:
+        listener.join()
