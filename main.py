@@ -84,5 +84,7 @@ while(True):
 # A faire :
 """
 tjr quelques bugs sur la reconnaissance,
-clics en plus quand pop up 
+clics en plus quand pop up
+pouvoir avoir un retour si l'exo est bon ou non ?
+faux positifs avec des majuscules ( changement de ligne ? ) 
 """
