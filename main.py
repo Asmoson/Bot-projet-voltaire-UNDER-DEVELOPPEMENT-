@@ -27,6 +27,11 @@ def attendre(x, y, button, pressed):
 for i in range(30):
     print("\n")
 
+
+mode = int(input("Quel mode ?\n1)Evaluation\n2)Entrainement\n==>"))
+
+
+
 while(True):
     coordinates = []
 
@@ -71,6 +76,6 @@ while(True):
 
     print("=============================")
 
-    
-    with mouse.Listener(on_click=attendre) as listener:
-        listener.join()
+    for i in range(mode):
+        with mouse.Listener(on_click=attendre) as listener:
+            listener.join()
