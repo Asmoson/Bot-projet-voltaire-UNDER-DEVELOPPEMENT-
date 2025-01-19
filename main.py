@@ -79,3 +79,10 @@ while(True):
     for i in range(mode):
         with mouse.Listener(on_click=attendre) as listener:
             listener.join()
+
+
+# A faire :
+"""
+tjr quelques bugs sur la reconnaissance,
+clics en plus quand pop up 
+"""
