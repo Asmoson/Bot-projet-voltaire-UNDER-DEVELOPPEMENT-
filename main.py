@@ -90,6 +90,5 @@ while(True):
 """
 tjr quelques bugs sur la reconnaissance,
 clics en plus quand pop up
-pouvoir avoir un retour si l'exo est bon ou non ?
-faux positifs avec des majuscules ( changement de ligne ? ) 
+pouvoir avoir un retour si l'exo est bon ou non ? 
 """
