@@ -23,6 +23,9 @@ def attendre(x, y, button, pressed):
         None
     else :
         return False
+    
+def removelines(value):
+    return value.replace('\n',' ')
 
 for i in range(30):
     print("\n")
@@ -59,7 +62,9 @@ while(True):
         threshold_image = high_contrast_image.point(lambda x: 0 if x < 128 else 255, "1")
 
 
-        text = pytesseract.image_to_string(threshold_image, lang='eng+fra')
+        text = removelines(pytesseract.image_to_string(threshold_image, lang='eng+fra'))
+        
+
         print("\nTexte détecté :")
         print("-----------------------------------")
         print(text)
