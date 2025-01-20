@@ -90,5 +90,6 @@ while(True):
 """
 tjr quelques bugs sur la reconnaissance : accents, homoglyphes, appostrophes, tirets
 clics en plus quand pop up
-pouvoir avoir un retour si l'exo est bon ou non ? 
+pouvoir avoir un retour si l'exo est bon ou non ?
+utiliser une API de recherche internet pour recuperer la correction directement sur projet voltaire ?  
 """
