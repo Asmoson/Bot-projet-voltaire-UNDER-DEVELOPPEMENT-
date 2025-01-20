@@ -88,7 +88,7 @@ while(True):
 
 # A faire :
 """
-tjr quelques bugs sur la reconnaissance,
+tjr quelques bugs sur la reconnaissance : accents, homoglyphes, appostrophes, tirets
 clics en plus quand pop up
 pouvoir avoir un retour si l'exo est bon ou non ? 
 """
